@@ -19,17 +19,10 @@ function HomePage() {
     event.preventDefault();
     let formData = new FormData();
     formData.append("imagefile", imagefile);
-    // axios
-    //   .get("http://localhost:5000/")
-    //   .then((res) => {
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
+    
 
     axios
-      .post("http://localhost:5000/api/compress", formData)
+      .post("http://localhost:5000/api/rotate", formData)
       .then((res) => {
         const data = res.data;
         // console.log(data);

@@ -4,7 +4,7 @@ import axios from "axios";
 import fileDownload from "js-file-download";
 import b64toBlob from "b64-to-blob";
 
-function ResizePage() {
+function RotatePage() {
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
 
@@ -19,7 +19,6 @@ function ResizePage() {
     event.preventDefault();
     let formData = new FormData();
     formData.append("imagefile", imagefile);
-    
 
     axios
       .post("http://localhost:5000/api/circle", formData)
@@ -64,4 +63,4 @@ function ResizePage() {
   );
 }
 
-export default ResizePage;
+export default RotatePage;

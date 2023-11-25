@@ -4,7 +4,7 @@ import axios from "axios";
 import fileDownload from "js-file-download";
 import b64toBlob from "b64-to-blob";
 
-function ResizePage() {
+function ConvertWebpFormatPage() {
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
 
@@ -64,4 +64,4 @@ function ResizePage() {
   );
 }
 
-export default ResizePage;
+export default ConvertWebpFormatPage;
