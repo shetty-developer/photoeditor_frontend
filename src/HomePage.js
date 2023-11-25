@@ -29,7 +29,7 @@ function HomePage() {
     //   });
 
     axios
-      .post("http://localhost:5000/uploadimage", formData)
+      .post("http://localhost:5000/api/compress", formData)
       .then((res) => {
         const data = res.data;
         // console.log(data);
