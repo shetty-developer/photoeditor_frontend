@@ -58,7 +58,7 @@ function CompressJpegPage() {
             Upload
           </button>
         </form>
-        {displayImagefile ? <img src={displayImagefile} alt="image" /> : null}
+        {displayImagefile ? <img src={displayImagefile} alt="not loaded" /> : null}
       </div>
     </>
   );
