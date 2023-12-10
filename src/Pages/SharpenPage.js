@@ -3,65 +3,81 @@ import { useState } from "react";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import b64toBlob from "b64-to-blob";
+import ReactCrop from 'react-image-crop';
+import 'react-image-crop/dist/ReactCrop.css';
 
 function SharpenPage() {
-  const [displayImagefile, setDisplayImageFile] = useState();
-  const [imagefile, setImageFile] = useState();
+	const [src, setSrc] = useState(null);
+	const [crop, setCrop] = useState({ aspect: 16 / 9 });
+	const [image, setImage] = useState(null);
+	const [output, setOutput] = useState(null);
 
-  function handleChange(e) {
-    //console.log(e.target.files);
-    setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
-    setImageFile(e.target.files[0]);
-    //console.log(e.target.files[0]);
-  }
+  
 
-  async function uploadFile(event) {
-    event.preventDefault();
-    let formData = new FormData();
-    formData.append("imagefile", imagefile);
-    
+	const selectImage = (file) => {
+		setSrc(URL.createObjectURL(file));
+	};
 
-    axios
-      .post("http://localhost:5000/api/circle", formData)
-      .then((res) => {
-        const data = res.data;
-        // console.log(data);
-        const blob = b64toBlob(data.b64Data, data.contentType);
-        // console.log(blob);
+	const cropImageNow = () => {
+		const canvas = document.createElement('canvas');
+		const scaleX = src.naturalWidth / src.width;
+		const scaleY = src.naturalHeight / src.height;
+		canvas.width = crop.width;
+		canvas.height = crop.height;
+		const ctx = canvas.getContext('2d');
 
-        const fileNameAndExt = imagefile.name.split(".");
+		const pixelRatio = window.devicePixelRatio;
+		canvas.width = crop.width * pixelRatio;
+		canvas.height = crop.height * pixelRatio;
+		ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+		ctx.imageSmoothingQuality = 'high';
 
-        fileDownload(blob, `${fileNameAndExt[0]}-resized.${fileNameAndExt[1]}`);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
+		ctx.drawImage(
+			image,
+			crop.x * scaleX,
+			crop.y * scaleY,
+			crop.width * scaleX,
+			crop.height * scaleY,
+			0,
+			0,
+			crop.width,
+			crop.height,
+		);
 
-  return (
-    <>
-      <div className="App">
-        <h2>Add Image:</h2>
+		// Converting to base64
+		const base64Image = canvas.toDataURL('image/jpeg');
+		setOutput(base64Image);
+	};
 
-        <form encType="multipart/form-data" method="post">
-          <input
-            type="file"
-            name="someExpressFiles"
-            multiple="multiple"
-            onChange={handleChange}
-          />
-          <button
-            onClick={(event) => {
-              uploadFile(event);
-            }}
-          >
-            Upload
-          </button>
-        </form>
-        {displayImagefile ? <img src={displayImagefile} alt="not loaded" /> : null}
-      </div>
-    </>
-  );
+	return (
+		<div className="App">
+       
+			<center>
+				<input
+					type="file"
+					
+					onChange={(e) => {
+						selectImage(e.target.files[0]);
+					}}
+				/>
+				<br />
+				<br />
+				<div>
+					{src && (
+						<div>
+							<ReactCrop src={src} onImageLoaded={setImage}
+								crop={crop} onChange={setCrop} > <img src={src} /></ReactCrop>
+							<br />
+							<button onClick={cropImageNow}>Crop</button>
+							<br />
+							<br />
+						</div>
+					)}
+				</div>
+				<div>{output && <img src={output} />}</div>
+			</center>
+		</div>
+	);
 }
 
 export default SharpenPage;

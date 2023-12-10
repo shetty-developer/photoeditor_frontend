@@ -7,26 +7,28 @@ import b64toBlob from "b64-to-blob";
 function RotatePage() {
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
+  const [roatatedegree, setRotateDegree] = useState("0deg");
 
   function handleChange(e) {
-    //console.log(e.target.files);
+
     setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
     setImageFile(e.target.files[0]);
-    //console.log(e.target.files[0]);
+
   }
 
   async function uploadFile(event) {
     event.preventDefault();
     let formData = new FormData();
     formData.append("imagefile", imagefile);
+    formData.append("rotatedegree",roatatedegree);
 
     axios
-      .post("http://localhost:5000/api/circle", formData)
+      .post("http://localhost:5000/api/rotate", formData)
       .then((res) => {
         const data = res.data;
-        // console.log(data);
+        
         const blob = b64toBlob(data.b64Data, data.contentType);
-        // console.log(blob);
+        
 
         const fileNameAndExt = imagefile.name.split(".");
 
@@ -35,6 +37,26 @@ function RotatePage() {
       .catch((err) => {
         console.error(err);
       });
+  }
+
+
+  function rotateZeroDegree(event) {
+    setRotateDegree("0deg");
+  }
+
+  function rotateNinetyDegree(event) {
+
+    setRotateDegree("90deg");
+  }
+
+  function rotateOneeightyDegree(event) {
+
+    setRotateDegree("180deg");
+  }
+
+
+  function rotateTwoseventyDegree(event) {
+    setRotateDegree("270deg");
   }
 
   return (
@@ -49,6 +71,8 @@ function RotatePage() {
             multiple="multiple"
             onChange={handleChange}
           />
+
+
           <button
             onClick={(event) => {
               uploadFile(event);
@@ -57,7 +81,37 @@ function RotatePage() {
             Upload
           </button>
         </form>
+
+        <button onClick={(event) => {
+          rotateZeroDegree(event);
+        }}>Roatate 0 Degree</button>
+
+        <button onClick={(event) => {
+          rotateNinetyDegree(event);
+        }}>Roatate 90 Degree</button>
+
+
+
+        <button onClick={(event) => {
+          rotateOneeightyDegree(event);
+        }}>Rotate 180 degree</button>
+
+
+
+        <button onClick={(event) => {
+          rotateTwoseventyDegree(event);
+        }}>Rotate 270 degree</button>
+
+
         {displayImagefile ? <img src={displayImagefile} alt="image" /> : null}
+
+        <h3>After rotation pic</h3>
+
+
+        {displayImagefile ? <img style={{
+          transform: `rotate(${roatatedegree})`
+        }} src={displayImagefile} alt="image" /> : null}
+
       </div>
     </>
   );
