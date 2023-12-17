@@ -10,16 +10,22 @@ import Footer from "./Footer";
 function ResizePage() {
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
 
   function handleChange(e) {
     setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
     setImageFile(e.target.files[0]);
   }
 
+ 
+
   async function uploadFile(event) {
     event.preventDefault();
     let formData = new FormData();
     formData.append("imagefile", imagefile);
+    formData.append("width", width);
+    formData.append("height", height);
 
     axios
       .post("http://localhost:5000/api/circle", formData)
@@ -30,7 +36,10 @@ function ResizePage() {
 
         const fileNameAndExt = imagefile.name.split(".");
 
-        fileDownload(blob, `${fileNameAndExt[0]}-imgeditortool.${fileNameAndExt[1]}`);
+        fileDownload(
+          blob,
+          `${fileNameAndExt[0]}-imgeditortool.${fileNameAndExt[1]}`
+        );
       })
       .catch((err) => {
         console.error(err);
@@ -64,10 +73,42 @@ function ResizePage() {
       ) : null}
 
       {displayImagefile ? (
+        <div className="resize-title">Resize the image</div>
+      ) : null}
+
+      {displayImagefile ? (
+        <div className="width-style">
+          <div>Width(px):</div>
+          <input
+            type="number"
+            value={width}
+            onChange={(e) => {
+              setWidth(e.target.value);
+            }}
+          ></input>
+        </div>
+      ) : null}
+
+      {displayImagefile ? (
+        <div className="height-style">
+          <div>Height(px):</div>
+          <input
+            type="number"
+            value={height}
+            onChange={(e) => {
+              setHeight(e.target.value);
+            }}
+          ></input>
+        </div>
+      ) : null}
+
+      {displayImagefile ? (
         <button
           className="upload-files-button"
           onClick={(event) => {
             uploadFile(event);
+            console.log(width);
+            console.log(height);
           }}
         >
           Upload

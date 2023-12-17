@@ -48,27 +48,34 @@ function SocialMediaPage() {
 
       <div className="tool-description">Compress Gif with the compression.</div>
 
-      <button>facebook</button>
+      <div className="social-media-cards">
+        <div className="facebook-card">
+          <div className="social-media-name">Facebook</div>
+          <button className="social-media-button">fb profile pic</button>
 
-      <button>facebook profile pic</button>
+          <button className="social-media-button">fb post</button>
+        </div>
 
-      <button>facebook post</button>
+        <div className="instragram-card">
+          <div className="social-media-name">Instragram</div>
+          <button className="social-media-button">insta profile pic</button>
 
-      <button>Instragram</button>
+          <button className="social-media-button">insta post</button>
+        </div>
 
-      <button>Instragram profile pic</button>
+        <div className="linkedin-card">
+          <div className="social-media-name">Linkedin</div>
+          <button className="social-media-button">Linkedin profile pic</button>
 
-      <button>Instragram post</button>
+          <button className="social-media-button">
+            Likedin background pic
+          </button>
 
-      <button>Linkedin</button>
+          <button className="social-media-button">Linkedin post</button>
+        </div>
+      </div>
 
-      <button>Linkedin profile pic</button>
-
-      <button>Likedin background pic</button>
-
-      <button>Linkedin post</button>
-
-      <div className="tool-form">
+      <div className="social-media-form">
         <form encType="multipart/form-data" method="post">
           <input
             type="file"
