@@ -2,25 +2,16 @@ import React from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import { useNavigate } from "react-router-dom";
+import "../App.css";
 
 function HomePage() {
   let navigate = useNavigate();
   return (
-    <div>
-      <Header></Header>
-      <hr></hr>
+    <div className="Homepage-style">
       <h2>The ultimate tool for all edits</h2>
-      <div
-        className="all-button-container"
-        style={{ display: "flex", flexDirection: "row" }}
-      >
+      <div className="first-row">
         <div
-          className="first-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/blur");
           }}
@@ -32,14 +23,9 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
         <div
-          className="second-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/compressjpegimage");
           }}
@@ -51,15 +37,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="third-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/compresspngimage");
           }}
@@ -70,24 +51,13 @@ function HomePage() {
 
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
       </div>
 
-      <div
-        className="space-break"
-        style={{ marginTop: "30px", marginBottom: "30px" }}
-      ></div>
-      <div
-        className="second-row"
-        style={{ display: "flex", flexDirection: "row" }}
-      >
+      <div className="row-space-break"></div>
+      <div className="second-row">
         <div
-          className="fourth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/compresswebpimage");
           }}
@@ -99,15 +69,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="fifth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/compressgifimage");
           }}
@@ -119,15 +84,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="sixth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/convertjpegimage");
           }}
@@ -139,24 +99,13 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
       </div>
 
-      <div
-        className="line-break"
-        style={{ marginTop: "30px", marginBottom: "30px" }}
-      ></div>
-      <div
-        className="third-row"
-        style={{ display: "flex", flexDirection: "row" }}
-      >
+      <div className="row-space-break"></div>
+      <div className="third-row">
         <div
-          className="seventh-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/convertpngimage");
           }}
@@ -168,15 +117,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="eighth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/convertwebpimage");
           }}
@@ -188,15 +132,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="ninth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/convertgifimage");
           }}
@@ -208,24 +147,13 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
       </div>
 
-      <div
-        className="line-break"
-        style={{ marginTop: "30px", marginBottom: "30px" }}
-      ></div>
-      <div
-        className="fourth-row"
-        style={{ display: "flex", flexDirection: "row" }}
-      >
+      <div className="row-space-break"></div>
+      <div className="fourth-row">
         <div
-          className="tenth-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/crop");
           }}
@@ -237,15 +165,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="eleven-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/resize");
           }}
@@ -257,15 +180,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="twelve-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/rotate");
           }}
@@ -277,24 +195,13 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
       </div>
 
-      <div
-        className="line-break"
-        style={{ marginTop: "30px", marginBottom: "30px" }}
-      ></div>
-      <div
-        className="fifth-row"
-        style={{ display: "flex", flexDirection: "row" }}
-      >
+      <div className="row-space-break"></div>
+      <div className="fifth-row">
         <div
-          className="thirteen-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/sharpen");
           }}
@@ -306,15 +213,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="fifteen-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/socialmedia");
           }}
@@ -326,15 +228,10 @@ function HomePage() {
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
 
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
 
         <div
-          className="fourteen-button-component"
-          style={{
-            width: "200px",
-            height: "120px",
-            backgroundColor: "papayawhip",
-          }}
+          className="homepage-button-components"
           onClick={() => {
             navigate("/watermark");
           }}
@@ -345,9 +242,8 @@ function HomePage() {
 
           <h6>Compress Jpg ,png ,svg and theory</h6>
         </div>
-        <div className="margin" style={{ marginLeft: "30px" }}></div>
+        <div className="space-between-component"></div>
       </div>
-      <Footer></Footer>
     </div>
   );
 }

@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import BlurPage from "./Pages/BlurPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import AboutPage from "./Pages/AboutPage";
 import Resizepage from "./Pages/ResizePage";
 import CompletionPage from "./Pages/CompletionPage";
 import CompressGifPage from "./Pages/CompressGifPage";
@@ -28,6 +29,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />} />
+        <Route path="/about" element={<AboutPage />}></Route>
         <Route path="/blur" element={<BlurPage />} />
         <Route path="/resize" element={<Resizepage />} />
         <Route path="/completion" element={<CompletionPage />} />

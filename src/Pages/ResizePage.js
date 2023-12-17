@@ -4,11 +4,12 @@ import axios from "axios";
 import fileDownload from "js-file-download";
 import b64toBlob from "b64-to-blob";
 import "../App.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function ResizePage() {
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
-
 
   function handleChange(e) {
     setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
@@ -21,14 +22,15 @@ function ResizePage() {
     formData.append("imagefile", imagefile);
 
     axios
-      .post("http://localhost:5000/api/resize", formData)
+      .post("http://localhost:5000/api/circle", formData)
       .then((res) => {
         const data = res.data;
+
         const blob = b64toBlob(data.b64Data, data.contentType);
 
         const fileNameAndExt = imagefile.name.split(".");
 
-        fileDownload(blob, `${fileNameAndExt[0]}-resized.${fileNameAndExt[1]}`);
+        fileDownload(blob, `${fileNameAndExt[0]}-imgeditortool.${fileNameAndExt[1]}`);
       })
       .catch((err) => {
         console.error(err);
@@ -36,42 +38,44 @@ function ResizePage() {
   }
 
   return (
-    <>
-      <div className="App">
-        <h1>Resize </h1>
-        
-        {displayImagefile ? null : (
-          <form encType="multipart/form-data" method="post">
-           <div>
-            <input
-              type="file"
-              className="choose-btn"
-              name="someExpressFiles"
-              multiple="multiple"
-              onChange={handleChange}
-            />
-          </div>
-          </form>
-        )}
+    <div>
+      <Header></Header>
 
-        
-        {displayImagefile ? (
-          <img src={displayImagefile} alt="not loaded" />
-        ) : null}
+      <div className="tool-header">Compress Gif</div>
 
-        <br></br>
-
-        {displayImagefile ? (
-          <button className="upload-btn"
-            onClick={(event) => {
-              uploadFile(event);
-            }}
-          >
-            Upload
-          </button>
-        ) : null}
+      <div className="tool-description">Compress Gif with the compression.</div>
+      <div className="tool-form">
+        <form encType="multipart/form-data" method="post">
+          <input
+            type="file"
+            name="someExpressFiles"
+            multiple="multiple"
+            onChange={handleChange}
+          />
+        </form>
       </div>
-    </>
+
+      {displayImagefile ? (
+        <img
+          className="display-image"
+          src={displayImagefile}
+          alt="not loaded"
+        />
+      ) : null}
+
+      {displayImagefile ? (
+        <button
+          className="upload-files-button"
+          onClick={(event) => {
+            uploadFile(event);
+          }}
+        >
+          Upload
+        </button>
+      ) : null}
+
+      <Footer></Footer>
+    </div>
   );
 }
 

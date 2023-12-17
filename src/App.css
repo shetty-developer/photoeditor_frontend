@@ -1,62 +1,251 @@
 /*laptop screen purpose*/
 
 @media only screen and (min-width: 600px) {
+  /*header style starts*/
 
+  .header-style {
+    display: flex;
+    flex-direction: row;
+  }
 
-.header-style {
-  margin-left: 30%;
+  .app-logo {
+    margin-left: 40px;
+    cursor: pointer;
+  }
+
+  .app-name {
+    margin-left: 600px;
+    cursor: pointer;
+  }
+
+  .menu-margin {
+    margin-left: 20px;
+  }
+
+  .home-button {
+    cursor: pointer;
+  }
+
+  .about-button {
+    cursor: pointer;
+  }
+
+  .tools-button {
+    cursor: pointer;
+  }
+
+  /*header style end */
+
+  /*footer style starts*/
+  .footer-style {
+    position: fixed;
+    bottom: 1px;
+    margin-left: 530px;
+  }
+
+  .footer-data {
+    display: flex;
+    flex-direction: row;
+  }
+
+  /*footer style ends */
+
+  /*about page style starts*/
+
+  .about-style {
+    font-size: medium;
+  }
+
+  /*about page style ends*/
+
+  /*crop style starts */
+
+.crop-image-style{
+  margin-left: 350px;
+  margin-bottom: 10px;
 }
 
-.footer-style {
-  margin-left: 30%;
+  .slider {
+    margin-left: 550px;
+  }
+
+  .rangeText {
+    margin-left: 20px;
+  }
+
+  /*crop style ends */
+
+  /*page not found page style  starts*/
+  .page-not-found-style {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+  }
+
+  .page-not-found-content {
+    font-size: 60px;
+  }
+  /*page not found page style ends*/
+
+  /*choose file button style starts*/
+  .choose-btn {
+    font-size: 16px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px black;
+    width: 260px;
+    outline: none;
+    margin: 20px;
+  }
+
+  ::-webkit-file-upload-button {
+    color: white;
+    background: #206a5d;
+    padding: 10px;
+    border: none;
+    border-radius: 50px;
+    box-shadow: 1px 0 1px 1 px #6b4559;
+    outline: none;
+  }
+
+  ::-webkit-file-upload-button:hover {
+    background: #438a5e;
+  }
+
+  .upload-btn {
+    font-size: 16px;
+    background: white;
+    border-radius: 50px;
+    box-shadow: 5px 5px 10px black;
+    width: 200px;
+    height: 40px;
+    outline: none;
+    margin: 10px;
+  }
+
+  /*Choose button style end*/
+
+  /*Home page styles starts*/
+  .Homepage-style {
+    margin-left: 80px;
+    margin-bottom: 50px;
+  }
+
+  .first-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .second-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .third-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .fourth-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .fifth-row {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .homepage-button-components {
+    width: 380px;
+    height: 180px;
+    background-color: palevioletred;
+    border-radius: 15px;
+  }
+
+  .space-between-component {
+    margin-left: 30px;
+  }
+
+  .row-space-break {
+    margin-top: 40px;
+  }
+
+  /*Home page styles ends*/
+
+  /*Compressgif page styles starts*/
+
+  .tool-header {
+    font-size: 45px;
+    font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+    font-weight: 400;
+    margin-left: 560px;
+    margin-bottom: 12px;
+  }
+
+  .tool-description {
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 200;
+    margin-left: 430px;
+    margin-bottom: 12px;
+  }
+
+  .tool-form {
+    margin-left: 622px;
+    margin-bottom: 12px;
+  }
+
+  .display-image {
+    width: 260px;
+    height: 240px;
+    margin-left: 530px;
+    margin-bottom: 12px;
+  }
+
+  .upload-files-button {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    margin-left: 580px;
+    font-size: medium;
+  }
+  /*Compressgif page styles ends*/
+
+  /*Completion page styles starts*/
+
+  .completion-greeting {
+    margin-left: 400px;
+    font-size: 40px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 300;
+    margin-bottom: 40px;
+    margin-top: 120px;
+  }
+
+  .completion-header {
+    margin-left: 400px;
+    margin-top: 20px;
+    font-size: 40px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 300;
+    margin-bottom: 40px;
+  }
+
+  .completion-description {
+    margin-left: 400px;
+    font-size: 35px;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+
+  /*Completion page style ends*/
 }
-
-.page-not-found-style {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 10px;
-}
-
-
-.choose-btn {
-  font-size: 16px;
-  background: white;
-  border-radius: 50px;
-  box-shadow: 5px 5px 10px black;
-  width: 260px;
-  outline: none;
-  margin: 20px;
-}
-
-::-webkit-file-upload-button {
-  color: white;
-  background: #206a5d;
-  padding: 10px;
-  border: none;
-  border-radius: 50px;
-  box-shadow: 1px 0 1px 1 px #6b4559;
-  outline: none;
-}
-
-::-webkit-file-upload-button:hover {
-  background: #438a5e;
-}
-
-.upload-btn {
-  font-size: 16px;
-  background: white;
-  border-radius: 50px;
-  box-shadow: 5px 5px 10px black;
-  width: 200px;
-  height: 40px;
-  outline: none;
-  margin: 10px;
-}
-
-}
-
 
 /*mobile screen purpose*/
 @media only screen and (max-width: 600px) {

@@ -4,15 +4,22 @@ import Header from "./Header";
 
 import Footer from "./Footer";
 
+import "../App.css";
+
 function CompletionPage(props) {
   return (
     <div>
       <Header></Header>
-      <h1>Your images are {props.toolname ? props.toolname : null}</h1>
 
-      <h6>Please share the tool in the social media</h6>
+      <div className="completion-greeting">Thanks for using our tool!</div>
 
-      <h6>Trusted tool</h6>
+      <div className="completion-header">
+        Your images are {props.toolname ? props.toolname : null}
+      </div>
+
+      <div className="completion-description">
+        Please check your download folder!
+      </div>
 
       <Footer></Footer>
     </div>

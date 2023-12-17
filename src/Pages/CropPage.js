@@ -1,89 +1,121 @@
-import React from "react";
-import ReactCrop from 'react-image-crop';
-import 'react-image-crop/dist/ReactCrop.css';
-import { useState } from "react";
-import axios from "axios";
-import fileDownload from "js-file-download";
-import b64toBlob from "b64-to-blob";
+import { useState, useRef, useEffect } from "react";
+import ReactCrop from "react-image-crop";
+import "react-image-crop/dist/ReactCrop.css";
+import "../App.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
+import { canvasPreview } from "../service/CropService";
 
-function CropPage() {
-
+export default function CropPage({ url }) {
+  const imgRef = useRef(null);
   const [crop, setCrop] = useState(null);
-  const [height, setHeight] = useState('');
-  const [width, setWidth] = useState('');
-  const [x, setX] = useState('');
-  const [y,setY] = useState('');
+  const [rotation, setRotation] = useState(0);
+  const [scale, setScale] = useState(1);
+  const [height, setHeight] = useState("");
+  const [width, setWidth] = useState("");
+  const [completedCrop, setCompletedCrop] = useState();
+  const imageUrl = url;
 
   const [displayImagefile, setDisplayImageFile] = useState();
   const [imagefile, setImageFile] = useState();
-
 
   function handleChange(e) {
     setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
     setImageFile(e.target.files[0]);
   }
 
+  const onZoom = (e) => {
+    setScale(parseFloat(e));
+  };
 
-  async function uploadFile(event) {
-    event.preventDefault();
-    let formData = new FormData();
-    formData.append("imagefile", imagefile);
-
-    axios
-      .post("http://localhost:5000/api/crop", formData)
-      .then((res) => {
-        const data = res.data;
-
-        const blob = b64toBlob(data.b64Data, data.contentType);
-
-        const fileNameAndExt = imagefile.name.split(".");
-
-        fileDownload(blob, `${fileNameAndExt[0]}-resized.${fileNameAndExt[1]}`);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }
-
-
+  const download = async () => {
+    await canvasPreview(imgRef.current, completedCrop, scale, rotation);
+  };
+  const onImageLoad = (e) => {
+    setHeight(e?.currentTarget?.height);
+    setWidth(e?.currentTarget?.width);
+    setCompletedCrop({
+      x: 0,
+      y: 0,
+      height: e?.currentTarget?.height,
+      width: e?.currentTarget?.width,
+      unit: "px",
+    });
+  };
   return (
     <div>
-      <form encType="multipart/form-data" method="post">
-        <label>Choose images to upload</label>
+      <Header></Header>
+      <div className="tool-header">Compress Gif</div>
+
+      <div className="tool-description">Compress Gif with the compression.</div>
+
+      <div className="tool-form">
+        <form encType="multipart/form-data" method="post">
+          <input
+            type="file"
+            name="someExpressFiles"
+            multiple="multiple"
+            onChange={handleChange}
+          />
+        </form>
+      </div>
+      {displayImagefile ? (
+        <div className="crop-image-style">
+          <ReactCrop
+            src={imagefile}
+            crop={crop}
+            onChange={(_, percentCrop) => {
+              setCrop(percentCrop);
+            }}
+            onComplete={(e) => {
+              if (e?.height == 0 || e?.width == 0) {
+                setCompletedCrop({
+                  x: 0,
+                  y: 0,
+                  height: height,
+                  width: width,
+                  unit: "px",
+                });
+              } else {
+                setCompletedCrop(e);
+              }
+            }}
+          >
+            <img
+            
+              ref={imgRef}
+              crossorigin="anonymous"
+              src={displayImagefile}
+              style={{ transform: `scale(${scale}) rotate(${rotation}deg)` }}
+              onLoad={onImageLoad}
+            />
+          </ReactCrop>
+        </div>
+      ) : null}
+
+      <div className={"controls"}>
         <input
-          type="file"
-          id="image_uploads"
-          name="someExpressFiles"
-          multiple="multiple"
-          onChange={handleChange}
-        />
-        <button
-          onClick={(event) => {
-            uploadFile(event);
+          type="range"
+          min={0.1}
+          max={3}
+          step={0.05}
+          value={scale}
+          onInput={(e) => {
+            onZoom(e.target.value);
           }}
-        >
-          Crop the image
+          className={"slider"}
+        ></input>
+        <span className={"rangeText"}>Zoom In/Out</span>
+      </div>
+
+      {displayImagefile ? (
+        <button className="upload-files-button" onClick={download}>
+          Upload
         </button>
-      </form>
+      ) : null}
 
-      <ReactCrop
-        src={displayImagefile}
-        crop={crop}
-        onChange={c => {
-          setCrop(c);
-        }}
-        onComplete={(e) => {
-          console.log(e);
-        }}
-      >
-        <img src={displayImagefile} />
-      </ReactCrop>
-
-
+      <Footer></Footer>
     </div>
-
-  )
+  );
 }
-
-export default CropPage;

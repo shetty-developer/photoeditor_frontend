@@ -1,36 +1,106 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
+import fileDownload from "js-file-download";
+import b64toBlob from "b64-to-blob";
+import "../App.css";
+import Header from "./Header";
+import Footer from "./Footer";
 
 function SocialMediaPage() {
+  const [displayImagefile, setDisplayImageFile] = useState();
+  const [imagefile, setImageFile] = useState();
 
-  
-  return <div>
+  function handleChange(e) {
+    setDisplayImageFile(URL.createObjectURL(e.target.files[0]));
+    setImageFile(e.target.files[0]);
+  }
 
-    <div>Social Media </div>
+  async function uploadFile(event) {
+    event.preventDefault();
+    let formData = new FormData();
+    formData.append("imagefile", imagefile);
 
+    axios
+      .post("http://localhost:5000/api/circle", formData)
+      .then((res) => {
+        const data = res.data;
 
-    <button>facebook</button>
+        const blob = b64toBlob(data.b64Data, data.contentType);
 
-    <button>facebook profile pic</button>
+        const fileNameAndExt = imagefile.name.split(".");
 
-    <button>facebook post</button>
+        fileDownload(
+          blob,
+          `${fileNameAndExt[0]}-imgeditortool.${fileNameAndExt[1]}`
+        );
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }
 
-    <button>Instragram</button>
+  return (
+    <div>
+      <Header></Header>
 
-    <button>Instragram profile pic</button>
+      <div className="tool-header">Compress Gif</div>
 
-    <button>Instragram post</button>
+      <div className="tool-description">Compress Gif with the compression.</div>
 
-    <button>Linkedin</button>
+      <button>facebook</button>
 
-    <button>Linkedin profile pic</button>
+      <button>facebook profile pic</button>
 
-    <button>Likedin background pic</button>
+      <button>facebook post</button>
 
-    <button>Linkedin post</button>
+      <button>Instragram</button>
 
+      <button>Instragram profile pic</button>
 
-  </div>;
+      <button>Instragram post</button>
+
+      <button>Linkedin</button>
+
+      <button>Linkedin profile pic</button>
+
+      <button>Likedin background pic</button>
+
+      <button>Linkedin post</button>
+
+      <div className="tool-form">
+        <form encType="multipart/form-data" method="post">
+          <input
+            type="file"
+            name="someExpressFiles"
+            multiple="multiple"
+            onChange={handleChange}
+          />
+        </form>
+      </div>
+
+      {displayImagefile ? (
+        <img
+          className="display-image"
+          src={displayImagefile}
+          alt="not loaded"
+        />
+      ) : null}
+
+      {displayImagefile ? (
+        <button
+          className="upload-files-button"
+          onClick={(event) => {
+            uploadFile(event);
+          }}
+        >
+          Upload
+        </button>
+      ) : null}
+
+      <Footer></Footer>
+    </div>
+  );
 }
 
 export default SocialMediaPage;
